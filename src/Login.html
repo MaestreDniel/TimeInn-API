@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/forms.css">
+    <title>TimeInn - Login</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/Logo Music4Events.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/7521fefac0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="layout">
+        <header><a href="Index.html"><img src="images/Logo Music4Events.png"></a></header>
+        <section id="infoutil">
+            <h4>Reserva entrada en tu concierto favorito</h4>
+            <div>
+                <i class="fas fa-ticket-alt"></i>
+                <div>En nuestra web te ofrecemos todas las facilidades para que puedas conseguir entradas 
+                    para ver a tus artistas favoritos.</div>
+            </div>
+            
+            <h4>Entérate de las últimas novedades</h4>
+            <div>
+                <i class="far fa-newspaper"></i>
+                <div>Trabajamos día a día para mantenerte actualizado. En nuestro portal de noticias
+                    podrás conocer de primera mano todo lo que necesitas saber.</div>
+            </div>
+            
+            <h4>Participa en nuestros sorteos</h4>
+            <div>
+                <i class="far fa-star"></i>
+                <div>Desde camisetas personalizadas, hasta pasar un día con tu ídolo. Formar parte de la 
+                    comunidad de Music4Events te da la posibilidad de participar en todos los sorteos.</div>
+            </div>
+            <h3>¿A qué estás esperando?</h3>
+        </section>
+        <section id="formlogin">
+            <h1>Iniciar sesión</h1>
+            <form  action="">
+                <input id="user" aria-label="Usuario" placeholder="Usuario*" type="text" name="user" aria-required="true">
+                <p id="errorName" class="error"></p>
+                <input id="password" aria-label="Contraseña" placeholder="Contraseña*" type="password" name="password" aria-required="true">
+                <span class="ver" id="verPassword"><i class="far fa-eye"></i></span>
+                <p id="errorPassword" class="error"><b></b></p>
+                <span id="errorLogin" class="error"></span><br>
+                <div id="loginButton" class="button" aria-label="Inicia sesión">Inicia sesión</div>
+                <div><b>¿Eres nuevo en Music4Events?</b></div>
+                <div id="signUpButton" class="button" aria-label="Inicia sesión"><a href="SignUp.html">Registrarse</a></div>
+                <div id="suscrito"></div>
+            </form><br>
+        </section>
+    </div>
+    <script src="js/Login.js" type="module"></script>
+    <style>
+        body{
+            background-image: url("images/fondoInicioSesion.jpg");
+            background-size: cover;
+        }
+    </style>
+</body>
+</html>

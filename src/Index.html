@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeInn - Inicio</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Logo Music4Events.png">
+  <link rel="stylesheet" type="text/css" href="css/Inicio.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/7521fefac0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="header">
+    <!-- Aquí cargaremos el header con el truco, se superpone al header que hagamos aquí -->
+    <header>
+      <div id="cabecera"></div>
+      <img id="logo" src="images/Logo Music4Events.png" alt="">
+      <nav id="paginas">
+          <div><a href="Index.html" style="color: rgba(160, 12, 0, 1);"><b>Inicio</b></a></div>
+          <div><a href="Conciertos.html" ><b>Conciertos</b></a></div>
+          <div onclick="mostrarFormulario()"><b>Grupos</b></div>
+          <div onclick="mostrarFormulario()"><b>Estilos</b></div>
+          <div class="buscar"><input id="search" type="search"><button id="buscar"></button></div>
+          <a href="Login.html"><i id="usertimeinn" class="fas fa-user"></i></a> 
+      </nav>
+    </header>
+  </div>
+  <div id="cuerpo">
+    <div id="news"></div>
+    <aside>
+      <div id="logueado"></div>
+    <div id="calendario">
+      <div id="calenheader">Noviembre 2021</div>
+      <div id="dias">
+        <div>L</div>
+        <div>M</div>
+        <div>X</div>
+        <div>J</div>
+        <div>V</div>
+        <div>S</div>
+        <div>D</div>
+        <div id="diauno" class="mesactual"><a href="Conciertos.html" style="color:black;">1</a></div>
+        <div class="mesactual">2</div>
+        <div class="mesactual">3</div>
+        <div class="mesactual">4</div>
+        <div class="mesactual">5</div>
+        <div class="mesactual">6</div>
+        <div class="mesactual">7</div>
+        <div class="mesactual">8</div>
+        <div class="mesactual">9</div>
+        <div class="mesactual">10</div>
+        <div class="mesactual">11</div>
+        <div class="mesactual">12</div>
+        <div class="mesactual">13</div>
+        <div class="mesactual">14</div>
+        <div class="mesactual">15</div>
+        <div class="mesactual">16</div>
+        <div class="mesactual">17</div>
+        <div class="mesactual">18</div>
+        <div class="mesactual">19</div>
+        <div class="mesactual">20</div>
+        <div class="mesactual">21</div>
+        <div class="mesactual">22</div>
+        <div class="mesactual">23</div>
+        <div class="mesactual">24</div>
+        <div class="mesactual">25</div>
+        <div class="mesactual">26</div>
+        <div class="mesactual">27</div>
+        <div class="mesactual">28</div>
+        <div class="mesactual">29</div>
+        <div class="mesactual">30</div>
+        <div class="blur">1</div>
+        <div class="blur">2</div>
+        <div class="blur">3</div>
+        <div class="blur">4</div>
+        <div class="blur">5</div>
+      </div>
+    </div>
+   
+    <div id="fecha"></div>
+    <br>
+
+    <div id="buyMusic">
+      <div class="grupShop">
+        <a href="https://www.merchandisingplaza.es/Merchandise-One-Direction/3728"><img src="images/grupshop1.PNG" alt=""></a>
+      </div>
+      <div class="grupShop">
+        <a href="https://www.merchandisingplaza.es/Merchandise-The-Beatles/295"><img clas src="images/grupshop2.PNG" alt=""></a>
+      </div>
+      <div class="grupShop">
+        <a href="https://www.merchandisingplaza.es/Merchandise-The-Rolling-Stones/301"><img src="images/grupshop3.PNG" alt=""></a>
+      </div>
+      <div class="grupShop">
+        <a href="https://www.merchandisingplaza.es/Merchandise-Pink-Floyd/296"><img src="images/grupshop4.PNG" alt=""></a>
+      </div>
+      <div class="grupShop">
+        <a href="https://www.merchandisingplaza.es/Merchandise-Queen/140"><img src="images/grupshop5.PNG" alt=""></a>
+      </div>
+      <div class="grupShop">
+        <a href="https://www.merchandisingplaza.es/Merchandise-AC-DC/3384"><img src="images/grupshop6.PNG" alt=""></a>
+      </div>
+    </div>
+
+
+    <div id="fanshop">
+      <a href="https://www.merchandisingplaza.es/Musica-Merchandise/m_2"><img src="images/Fan_Shop.png" width="1.5vw" height="1.5vh"></a>
+    </div>
+    </aside>
+  <main>
+ 
+    <div id="eventos"></div>
+    
+
+    <div id="video"> <!-- src="https://www.youtube.com/embed/G9kz-tag04U?autoplay=1" -->
+        <iframe src="https://www.youtube.com/embed/G9kz-tag04U" title="YouTube video player" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    
+    <div id="suscripcion">
+      <form id="sub" action="">
+        <div id="close" onclick="login()"><i class="fas fa-times-circle"></i></div>
+        <h1>
+          Welcome to Music 4 Events
+        </h1>
+        <div class="login">
+          <label><b>EMAIL</b></label>
+          <input class="sub" type="email" id="logEmail" /> <br />
+          <label><b>PASSWORD</b></label>
+          <input class="sub" type="password" id="logPassword" />
+        </div>
+        <img id="buttonsub" onclick="login()" src="images/Logo Music4Events.png" alt="" />
+      </form>
+    </div>
+  <div id="festivalDestacado">
+    
+  </div>
+  </main>
+  </div>
+  <div onclick="backToTop()" id="top" title="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  <div id="footer">
+    <!-- Aquí cargaremos el footer con el truco, se superpone al footer que hagamos aquí -->
+    <footer>
+      <div id="follow"><i class="fas fa-thumbs-up"></i>Síguenos en:
+        <p><i class="far fa-copyright"></i> 2022</p>
+      </div>
+      <div><i class="fab fa-twitter"></i><a href="https://twitter.com">Twitter</a></div>
+      <div><i class="fab fa-instagram"></i><a href="https://www.instagram.com/">Instagram</a></div>
+      <div><i class="fab fa-facebook"></i><a href="https://es-es.facebook.com/">Facebook</a></div>
+      <div><i class="fab fa-youtube"></i><a href="https://www.youtube.com/">YouTube</a></div>
+      <div id="url">
+        <a href="https://www.ticketmaster.es/">TICKETMASTER</a>
+        <a href="https://www.entradas.com/">ENTRADAS</a>
+        <a href="https://www.ticketea.com/">TIKETEA</a>
+        <a href="https://entradas.ataquilla.com/ventaentradas/es/">ATAQUILLA</a> 
+      </div>
+  </footer>
+  </div>
+  <script src="js/Inicio.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+  </script>
+  <script> 
+  //Cargar Header y Footer
+  $(function(){
+    $("#header").load("header.html"); 
+    $("#footer").load("footer.html"); 
+  });
+  </script> 
+</body>
+</html>
