@@ -25,99 +25,82 @@
 <body>
 
 <!--HEADER-->
-<div id="header">
-    <!-- Aquí cargaremos el header con el truco, se superpone al header que hagamos aquí -->
-    <header>
-      <div id="cabecera"></div>
-      <img id="logo" src="images/Logo Music4Events.png" alt="">
-      <nav id="paginas">
-          <div><a href="Index.html" ><b>Inicio</b></a></div>
-          <div><a href="Conciertos.html" style="color: rgba(160, 12, 0, 1);" ><b>Conciertos</b></a></div>
-          <div onclick="mostrarFormulario()"><b>Grupos</b></div>
-          <div onclick="mostrarFormulario()"><b>Estilos</b></div>
-          <div class="buscar"><input id="search" type="search"><button id="buscar"></button></div>
-          <a href="Login.html"><i id="usertimeinn" class="fas fa-user"></i></a> 
-      </nav>
-    </header>
-  </div>
-<!--CUERPO-->
-    <div id="cuerpo">
-            
-<!--DESTACAD0-->
-    <div id="destacado">
-        <img src="images/ConcertoDestacado.webp" alt="">
+    <div id="header">
+        <!-- Aquí cargaremos el header con el truco, se superpone al header que hagamos aquí -->
+        <header>
+        <div id="cabecera"></div>
+        <img id="logo" src="images/Logo Music4Events.png" alt="">
+        <nav id="paginas">
+            <div><a href="Index.html" ><b>Inicio</b></a></div>
+            <div><a href="Conciertos.html" style="color: rgba(160, 12, 0, 1);" ><b>Conciertos</b></a></div>
+            <div onclick="mostrarFormulario()"><b>Grupos</b></div>
+            <div onclick="mostrarFormulario()"><b>Estilos</b></div>
+            <div class="buscar"><input id="search" type="search"><button id="buscar"></button></div>
+            <a href="Login.html"><i id="usertimeinn" class="fas fa-user"></i></a> 
+        </nav>
+        </header>
     </div>
+<!--CUERPO-->
+
+    <div id="contfunc">
+        <div class="funciones">Añadir nuevo concierto<button onclick="saltarFormulario()" type="button" id="addConcert"><i class="far fa-plus-square"></i></button></div>
+        <div class="funciones">Filtros de búsqueda<button onclick="filtraConciertos()" type="button" id="filterConcert"><i class="fas fa-filter"></i></button></div>
+        <div class="funciones">Resetea los filtros<button onclick="imprimirConcierto()" type="button" id="filterConcert"><i class="fas fa-undo-alt"></i></button></div>
+    </div>
+    
+    <div id="cuerpo">
+        <div id="fetchresult"></div>
+        <div id="fetcherror"></div>
 
 <!--MAIN CONCIERTOS-->
-    <main id="conciertos">
+        <main id="conciertos">
         
-    </main>
+        </main>
 
-<!--Aside-->
-    <aside>
-
-<!--FORMULARIO NUEVO EVENTO-->
-<div id="newConcierto" style="display: none;">
-    <form id="concierform" action="">
-      <div id="closeForm" onclick="cerrable()"><i class="fas fa-times-circle"></i></div>
-      <h1>CREADOR DE CONCIERTOS</h1>
-      <label class="newConcierto">Link: <input type="link" name="link" id="link"></label>
-      <!-- <label class="newConcierto">Poster Concierto: <input class="newConcierto" type="file" name="poster" id="poster"></label> -->
-      <label class="newConcierto">Título: <input class="newConcierto" type="text" name="titulo" id="titulo"></label>
-      <label class="newConcierto">Grupo/Cantante: <input class="newConcierto" type="text" name="grupo" id="grupo"></label>
-      <label class="newConcierto">Fecha: <input class="newConcierto" type="date" name="fecha" id="fecha"></label>
-      <label class="newConcierto">Lugar: <input class="newConcierto" type="text" name="lugar" id="lugar"></label>
-      <button type="button" id="add" onclick="añadirConcierto(), closeForm()"><i class="fas fa-plus-square"></i></button>
-    </form>
-  </div>
-  <br>
-
-<!--Calendario-->  
-        <div id="calendario">
-            <!-- <input type="date"> -->
-
-
-
-<!--Fan Shop-->        
-        <div id="fanshop">
-            <a href="https://www.merchandisingplaza.es/Musica-Merchandise/m_2"><img src="images/Fan_Shop.png"></a>
-       
-            
+        <div id="newConcierto" style="display: none;">
+            <form id="concierform" action="">
+            <div id="closeForm" onclick="cerrable()"><i class="fas fa-times-circle"></i></div>
+            <h1>CREADOR DE CONCIERTOS</h1>
+            <label class="newConcierto">Link: <input type="link" name="link" id="link"></label>
+            <!-- <label class="newConcierto">Poster Concierto: <input class="newConcierto" type="file" name="poster" id="poster"></label> -->
+            <label class="newConcierto">Título: <input class="newConcierto" type="text" name="titulo" id="titulo"></label>
+            <label class="newConcierto">Grupo/Cantante: <input class="newConcierto" type="text" name="grupo" id="grupo"></label>
+            <label class="newConcierto">Fecha: <input class="newConcierto" type="date" name="fecha" id="fecha"></label>
+            <label class="newConcierto">Lugar: <input class="newConcierto" type="text" name="lugar" id="lugar"></label>
+            <button type="button" id="add"><i class="fas fa-plus-square"></i></button>
+            </form>
         </div>
-        <div id="comprar">
-            <div class="buy">
-                <a href="https://www.merchandisingplaza.es/Ed-Sheeran/Camiseta-Ed-Sheeran-unisex---Design--Equals-439378"><img class="buy" src="images/buy1.PNG" alt=""></a>
-            </div>
-            <div class="buy">
-                <a href="https://www.merchandisingplaza.es/Queen/Calendario-Queen--2022-437356"><img class="buy" src="images/buy2.PNG" alt=""></a>
-            </div>
-            <div class="buy">
-                <a href="https://www.merchandisingplaza.es/Frank-Zappa/Mini-Guitar-Frank-Zappa-366998"><img class="buy" src="images/buy3.PNG" alt=""></a>
-            </div>
-            <div class="buy">
-                <a href="https://www.merchandisingplaza.es/Kiss/Bata-Kiss-de-hombre-424202"><img class="buy" src="images/buy4.PNG" alt=""></a>
-            </div>
-            
-           
-        </div>
-      
-    </aside>
 
-</div>
-</div>
+        <div id="editConcierto" style="display: none;">
+            <form id="concierformedit" action="">
+            <div id="closeFormEdit" onclick="cerrable()"><i class="fas fa-times-circle"></i></div>
+            <h1>EDITOR DE CONCIERTOS</h1>
+            <label class="editConcierto">Link: <input type="link" name="link" id="linkk"></label>
+            <!-- <label class="editConcierto">Poster Concierto: <input class="editConcierto" type="file" name="poster" id="poster"></label> -->
+            <label class="editConcierto">Título: <input class="editConcierto" type="text" name="titulo" id="tituloo"></label>
+            <label class="editConcierto">Grupo/Cantante: <input class="editConcierto" type="text" name="grupo" id="grupoo"></label>
+            <label class="editConcierto">Fecha: <input class="editConcierto" type="date" name="fecha" id="fechaa"></label>
+            <label class="editConcierto">Lugar: <input class="editConcierto" type="text" name="lugar" id="lugarr"></label>
+            <button type="button" id="edit"><i class="fas fa-plus-square"></i></button>
+            </form>
+        </div>
+        <br>
+
+
+    </div>
 <!--Top Button-->
-<div onclick="backToTop()" id="top" title="Volver arriba"><i class="fas fa-arrow-up"></i></div>
+    <div onclick="backToTop()" id="top" title="Volver arriba"><i class="fas fa-arrow-up"></i></div>
 <!--FOOTER-->
-<div id="footer">
-<footer>
-    <div id="follow"><i class="fas fa-thumbs-up"></i>Síguenos en:</div>
-    <div><i class="fab fa-twitter"></i>Twitter</div>
-    <div><i class="fab fa-instagram"></i>Instagram</div>
-    <div><i class="fab fa-facebook"></i>Facebook</div>
-    <div><i class="fab fa-youtube"></i>YouTube</div>
-    <div><a href="Conciertos.html">Enlace</a></div>
-</footer>
-</div>
+    <div id="footer">
+        <footer>
+            <div id="follow"><i class="fas fa-thumbs-up"></i>Síguenos en:</div>
+            <div><i class="fab fa-twitter"></i>Twitter</div>
+            <div><i class="fab fa-instagram"></i>Instagram</div>
+            <div><i class="fab fa-facebook"></i>Facebook</div>
+            <div><i class="fab fa-youtube"></i>YouTube</div>
+            <div><a href="Conciertos.html">Enlace</a></div>
+        </footer>
+    </div>
   
 
 
@@ -126,14 +109,14 @@
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous">
-</script>
-<script> 
+    </script>
+    <script> 
 
-//Cargar Header y Footer
-$(function(){
-  $("#header").load("header.html"); 
-  $("#footer").load("footer.html"); 
-});
-</script> 
+    //Cargar Header y Footer
+    $(function(){
+    $("#header").load("header.html"); 
+    $("#footer").load("footer.html"); 
+    });
+    </script> 
 </body>
 </html>

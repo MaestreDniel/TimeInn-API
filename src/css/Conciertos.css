@@ -28,12 +28,13 @@
 }
 
 body {
-  background-image: url(../images/fondoescenario.jpg);
+  background-image: url("../images/fondoescenario.jpg");
   background-size: cover;
   background-attachment: fixed;
   font-family: "Source Sans Pro", sans-serif;
   margin: 0;
 }
+
 /*HEADER*/
 header {
   display: flex;
@@ -180,45 +181,67 @@ button#buscar {
 
 /*CUERPO*/
 div#cuerpo {
-  display: flex;
-  align-items: flex-start;
-}
-
-/*CONCIERTO DESTACADO DESTACADO*/
-div#destacado {
-  background-color: black;
-  display: flex;
-  order: -1;
-  width: 50vw;
-  height: 100vh;
-  width: 20%;
-  position: sticky;
-  top: 0;
-}
-
-#destacado img {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50px 95%;
+  gap: 0% 0%;
+  grid-auto-flow: column;
+  justify-items: center;
+  grid-template-areas:
+    "fetchresult fetchresult"
+    "conciertos conciertos";
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+#fetchresult {
+  grid-area: fetchresult;
+}
+
+#conciertos {
+  grid-area: conciertos;
+}
+
+/*Fetch feedback*/
+
+#fetchresult {
+  grid-area: fetchresult;
+  color: green;
+  font-size: 2vw;
+}
+
+#fetcherror {
+  grid-area: fetchresult;
+  color: red;
+  font-size: 2vw;
 }
 
 /*CONCIERTOS*/
 main {
-  order: 0;
   display: flex;
+  width: 90%;
+  margin: 1vw;
   flex-wrap: wrap;
-  flex-direction: column;
-  align-items: flex-start;
-  align-content: space-around;
-}
-
-main#conciertos {
-  background-color: var(--rgba-primary-4-transpar);
+  justify-content: center;
+  margin-bottom: 4vw;
 }
 
 div.concert {
   display: flex;
+  flex: 0 1 40%; /* Todos los elementos*/
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid gray;
+  margin: 5px;
+  padding: 1%;
+  box-shadow: 10px 10px 14px var(--rgba-primary-0);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+div.concert:hover {
+  box-shadow: 10px 10px 14px var(--rgba-secondary-2-2);
 }
 
 .concert h3 {
@@ -258,11 +281,10 @@ div.concert {
 div#contfunc {
   display: flex;
   font-size: 2vw;
-  padding: 0vw 1vw 1vw 1vw;
-  background-color: var(--rgba-secondary-1-0);
+  padding: 1vw;
+  background-color: var(--rgba-primary-4);
   color: white;
-  justify-content: space-around;
-  text-align: center;
+  justify-content: space-evenly;
 }
 
 .funciones button {
@@ -307,47 +329,6 @@ button#newConcert {
   width: 5vh;
   height: 5vh;
   margin-left: 50vw;
-}
-
-/*ASIDE*/
-/*ASIDE DERECHA*/
-aside {
-  display: grid;
-  order: 1;
-  height: 100%;
-  background-color: black;
-  width: 25%;
-}
-
-.imgEvent {
-  width: 100%;
-}
-
-#fanshop {
-  width: 100%;
-  top: 12vh;
-}
-
-#fanshop img {
-  width: 100%;
-  height: 100%;
-}
-
-div#comprar {
-  display: grid;
-}
-
-div.buy {
-  display: grid;
-  margin: 1%;
-  width: 100%;
-  justify-items: center;
-  align-items: center;
-  justify-content: center;
-}
-img.buy {
-  display: grid;
-  width: 20vw;
 }
 
 /*FOOTER*/
@@ -420,20 +401,6 @@ div#formularioBusqueda {
   display: none;
 }
 
-div#formularioNew {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-  cursor: pointer;
-}
-
 /* #overlay {
 
 } */
@@ -468,7 +435,7 @@ div#formularioNew {
   bottom: 2vh;
 }
 
-div#newConcierto {
+div#newConcierto, #editConcierto {
   position: fixed;
   display: none;
   width: 100%;
@@ -481,7 +448,7 @@ div#newConcierto {
   z-index: 105;
 }
 
-#concierform {
+#concierform, #concierformedit {
   background-image: url("../images/concert_live_main_Uns-1280x720.jpg");
   background-size: cover;
   width: 100%;
@@ -494,7 +461,7 @@ div#newConcierto {
   z-index: 20;
 }
 
-#newConcierto label {
+#newConcierto label, #editConcierto label {
   display: flex;
   font-size: 1.5vw;
   color: white;
@@ -503,47 +470,36 @@ div#newConcierto {
   padding-left: 1vw;
 }
 
-#newConcierto h1 {
+#newConcierto h1, #editConcierto h1 {
   background-color: var(--rgba-primary-0);
   color: white;
   margin: 1% 1% 1% 1%;
   padding: 1%;
 }
 
-#newConcierto input {
+#newConcierto input, #editConcierto input {
   margin-left: 1vw;
 }
 
-#closeForm {
+#closeForm, #closeFormEdit {
   display: inline;
   margin-left: auto;
   color: var(--rgba-secondary-2-2);
   cursor: pointer;
 }
 
-#closeForm .fas {
+#closeForm .fas, #closeFormEdit .fas {
   font-size: 3vw;
 }
 
-div#closeForm:hover {
+#closeForm:hover, #closeFormEdit:hover {
   color: var(--rgba-secondary-2-3);
 }
 
-
 /*Fuentes de letra*/
-*{
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h1,h2,h3,h4{
-  font-family: 'Times New Roman', Times, serif;
-
-}
-
-
 
 label {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 p {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -555,7 +511,8 @@ input {
 
 /*Boton Save/Añadir Concierto*/
 
-#add,#save {
+#add,
+#save {
   background-color: var(--rgba-secondary-1-2);
   cursor: pointer;
 }

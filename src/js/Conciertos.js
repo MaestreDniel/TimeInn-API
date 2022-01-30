@@ -1,215 +1,124 @@
 /**
- * @author: Jeroni Mateo Curieses, Daniel Maestre Hermoso
- * Fecha inicio: 3/11/2021
- * Fecha fin: 28/11/2021
- * Asignatura: Entorno Cliente y Diseño de Interfaces
+ * @author: Daniel Maestre Hermoso
+ * Fecha inicio: 24/01/2022
+ * Fecha fin: 
+ * Asignatura: Entorno Cliente
  * @version: 1.0
  */
 
-// TODO:Objeto Conciertos.DONE
-// Creamos los objetos para los conciertos
-const Concert = {
-  conciertos: [{
-      /**
-       * Cada objeto tendrá:
-       * Un div donde irá metido un id para poder manipularlo 
-       * El link que dirige al usuario a la página oficial del grupo
-       * Una imagen del poster del concierto
-       * Título del concierto
-       * El nombre del grupo o cantante
-       * Las fechas de los eventos 
-       * Lugar del concierto
-       */
-      div: '<div class="concert" id="concierto1">',
-      link: ' <a href="https://www.the-scorpions.com/">',
-      foto: '<img class="imgEvent" src="images/concierto1.PNG" alt="No se pudo mostrar">',
-      titulo: "Concierto Scorpions",
-      grupo: "Scorpions",
-      fecha: "2022-06-24",
-      lugar: "",
-    },
-    {
-      div: '<div class="concert" id="concierto2">',
-      link: '<a href="https://stageverse.muse.mu/?ref=https://www.google.com/">',
-      foto: '<img class="imgEvent" src="images/concierto2.PNG" alt="No se pudo mostrar">',
-      titulo: "Muse Live Festival",
-      grupo: "Muse",
-      fecha: "2022-06-25",
-      lugar: "",
-    },
-    {
-      div: '<div class="concert" id="concierto3">',
-      link: ' <a href="https://filmsymphony.es/">',
-      foto: '<img class="imgEvent" src="images/concierto3.PNG" alt="No se pudo mostrar">',
-      titulo: "FSO Fénix La Gira",
-      grupo: "Fenix",
-      fecha: "2022-05-30",
-      lugar: "",
-    },
-    {
-      div: '<div class="concert" id="concierto4">',
-      link: '<a href="https://ctangana.com/">',
-      foto: '<img class="imgEvent" src="images/concierto4.PNG" alt="No se pudo mostrar">',
-      titulo: "Rio Babel, C. Tangana",
-      grupo: "C.Tangana",
-      fecha: "2022-07-01",
-      lugar: "Madrid",
-    },
-    {
-      div: '<div class="concert" id="concierto5">',
-      link: '<a href="https://www.justinbiebermusic.com/">',
-      foto: '<img class="imgEvent" src="images/concierto5.PNG" alt="No se pudo mostrar">',
-      titulo: "Justice World Tour, Justin Bieber",
-      grupo: "Justin Bieber",
-      fecha: "2022-10-10",
-      lugar: "Estadio Unico de la Plata",
-    },
-    {
-      div: '<div class="concert" id="concierto6">',
-      link: '<a href="https://www.pinkfloyd.com/home.php">',
-      foto: '<img class="imgEvent" src="images/concierto6.PNG" alt="No se pudo mostrar">',
-      titulo: "Nicks Masons Saugerful of Secrets, Pink Floyd",
-      grupo: "Pink Floyd",
-      fecha: "2022-07-09",
-      lugar: "Barcelona",
-    },
-  ]
-}
+let apiConcert = 'http://localhost:3000/conciertos';
 
-//TODO:Imprimir Concierto.DONE
-function imprimirConcierto(conciertos) {
-  let txt = "";
-  txt += "<br>"
-  txt += '<div id="contfunc"><div class="funciones">Añadir nuevo concierto<button onclick="saltarFormulario()" type="button" id="addConcert"><i class="far fa-plus-square"></i></button></div>';
-  txt += '<div class="funciones">Filtros de búsqueda<button onclick="filtraConciertos()" type="button" id="filterConcert"><i class="fas fa-filter"></i></button></div>';
-  txt += '<div class="funciones">Resetea los filtros<button onclick="imprimirConcierto(Concert.conciertos)" type="button" id="filterConcert"><i class="fas fa-undo-alt"></i></button></div></div>';
-  // Creamos un bucle Para recorrer los objetos de los Conciertos y a continuación imprimimos cada uno de ellos
-  for (let i in conciertos) {
-    txt += conciertos[i].div;
-    txt += conciertos[i].link + conciertos[i].foto + "</a>";
-    txt += '<div class="infoConcert">';
-    txt += '<div id="edicion">';
-    txt += `<button id="editConcert" onclick="editEvent(${i})"><i class="fas fa-pencil-alt"></i></button>`;
-    txt += `<button onclick="eliminarEvent(${i})" class="delConcert"><i class="fas fa-trash-alt"></i></button>`
-    txt += '</div>'
-    txt += "<h2>" + conciertos[i].titulo + "</h2>";
-    txt += "<h3>" + conciertos[i].grupo + "</h3>";
-    txt += "<h3>" + conciertos[i].fecha + "</h3>";
-    txt += "<h3>" + conciertos[i].lugar + "</h3>";
-    txt += '</div>';
-    txt += '</div>'
-  }
-  document.getElementById("conciertos").innerHTML = txt;
+function imprimirConcierto() {
+
+  fetch(apiConcert)
+    .then((response) => response.json())
+    .then((conciertos) => {
+      let txt = "";
+      txt += "<br>";
+      for (let i in conciertos) {
+        txt += conciertos[i].div;
+        txt += conciertos[i].link + conciertos[i].foto + "</a>";
+        txt += '<div class="infoConcert">';
+        txt += '<div id="edicion">';
+        txt += `<button id="editConcert" onclick="saltarFormularioEdit(${conciertos[i].id})"><i class="fas fa-pencil-alt"></i></button>`;
+        txt += `<button onclick="eliminarEvent(${conciertos[i].id})" class="delConcert"><i class="fas fa-trash-alt"></i></button>`;
+        txt += '</div>';
+        txt += "<h2>" + conciertos[i].titulo + "</h2>";
+        txt += "<h3>" + conciertos[i].grupo + "</h3>";
+        txt += "<h3>" + conciertos[i].fecha + "</h3>";
+        txt += "<h3>" + conciertos[i].lugar + "</h3>";
+        txt += '</div>';
+        txt += '</div>';
+      }
+      document.getElementById("conciertos").innerHTML = txt;
+    })
+    .catch(function (error) {
+      document.getElementById("fetcherror").innerHTML = "Ha habido algún problema para mostrar los conciertos";
+    })
 }
 
 // Se imprime directamente al cargar la página
-imprimirConcierto(Concert.conciertos);
-
-
-//TODO:EventoDestacado.DONE
-const EventDes = {
-  destacado: [{
-    foto: '<img class="imgEvent" src="images/event1.PNG" alt="No se pudo mostrar">',
-    nombre: 'Mallorca Live Festival',
-    descripcion: 'Venid al gran festival de la musica en Mallorca'
-  }]
-}
-//Una vez Creado el objeto destacado creamos una funcion con un for para imprimirlo directamente al ejecutar
-function eventoDestacado() {
-  let txt = "";
-  txt += '<div class="degradadoizq"></div>';
-  for (let i in EventDes.destacado) {
-
-    txt += '<div class="event">';
-    txt += EventDes.destacado[i].foto;
-    txt += '<p><span>' + EventDes.destacado[i].nombre + '</span></p>';
-    txt += '<i class="fas fa-info-circle"></i>' + '</div>';
-  }
-  txt += '<div class="degradadoder"></div>';
-  document.getElementById("eventDes").innerHTML = txt;
-}
-//Impimimos el evento destacado a la izquierda de la pantalla
-eventoDestacado();
-
+imprimirConcierto();
 
 
 //TODO: Saltar Formulario Nuevo Concierto 
 function saltarFormulario() {
   document.getElementById("newConcierto").style.display = "block";
+  document.getElementById("add").addEventListener("click", function () {
+    confirmaAdd();
+    closeForm();
+  });
 }
 
-// TODO:Añadir nuevo Concierto
-// Cogemos los todos valores del formulario 
-// Creamos un objeto con cada uno de los valores del formulario
-// Finalmente lo imprimimos debajo del último evento
+function saltarFormularioEdit(evento) {
+  document.getElementById("editConcierto").style.display = "block";
+  document.getElementById("edit").addEventListener("click", function () {
+    confirmaEdit(evento);
+    closeForm();
+  });
+  return evento;
+}
+
+function confirmaAdd() {
+  if (document.getElementById("link").value === "" ||
+    document.getElementById("titulo").value === "" || document.getElementById("grupo").value === "" ||
+    document.getElementById("fecha").value === "" || document.getElementById("lugar").value === "") {
+    cerrarForm = false;
+    alert("Debes rellenar todos los campos del formulario");
+  } else {
+    cerrarForm = true;
+    añadirConcierto();
+  }
+}
+
+function confirmaEdit(evento) {
+  if (document.getElementById("linkk").value === "" ||
+    document.getElementById("tituloo").value === "" || document.getElementById("grupoo").value === "" ||
+    document.getElementById("fechaa").value === "" || document.getElementById("lugarr").value === "") {
+    cerrarForm = false;
+    alert("Debes rellenar todos los campos del formulario");
+  } else {
+    cerrarForm = true;
+    editEvent(evento);
+  }
+}
 
 let cerrarForm = false;
 
 function añadirConcierto() {
-  let randomid = Math.round(Math.random() * 1000000, 1);
-  const conciertoNuevo = [{
-    div: `<div class="concert" id="${randomid}">`,
-    url: document.getElementById("link").value,
-    poster: '<img src="/src/images/concierto1.png" >',
-    titulo: document.getElementById("titulo").value,
-    grupo: document.getElementById("grupo").value,
-    fecha: document.getElementById("fecha").value,
-    lugar: document.getElementById("lugar").value
-  }];
+  fetch('http://localhost:3000/conciertos', {
+      method: 'POST',
+      body: JSON.stringify({
+        div: '<div class="concert">',
+        link: '<a href="https://www.the-scorpions.com/">',
+        foto: '<img class="imgEvent" src="images/concierto1.PNG" alt="No se pudo mostrar">',
+        titulo: document.getElementById("titulo").value,
+        grupo: document.getElementById("grupo").value,
+        fecha: document.getElementById("fecha").value,
+        lugar: document.getElementById("lugar").value,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(imprimirConcierto())
+    .then((document.getElementById("fetchresult").innerHTML = "Concierto añadido con éxito. En caso de que no lo veas, refresca la página."));
 
-  let txt = "";
-  txt += "<br>"
-  //Para imprimir hacemos lo mismo que con las noticias recorremos el objeto y se va imprimiendo
-  for (let i in conciertoNuevo) {
-    txt += conciertoNuevo[i].div;
-    txt += conciertoNuevo[i].poster;
-    txt += '<div class="infoConcert">';
-    txt += "<h2>" + conciertoNuevo[i].titulo + "</h2>";
-    txt += "<h3>" + conciertoNuevo[i].grupo + "</h3>";
-    txt += "<h3>" + conciertoNuevo[i].fecha + "</h3>";
-    txt += "<h3>" + conciertoNuevo[i].lugar + "</h3>";
-    txt += '</div>';
-    txt += '<div id="edicion">';
-    txt += '<button id="editConcert" onclick="editEvent()"><i class="fas fa-pencil-alt"></i></button>';
-    txt += '<button onclick="eliminarEvent()" class="delConcert"><i class="fas fa-trash-alt"></i></button>'
-    txt += '</div>'
-    txt += '</div>'
-    if (conciertoNuevo[i].url === "" || conciertoNuevo[i].titulo === "" ||
-      conciertoNuevo[i].grupo === "" || conciertoNuevo[i].fecha === "" ||
-      conciertoNuevo[i].lugar === "") {
-      cerrarForm = false;
-      alert("Debes rellenar todos los campos del formulario");
-    } else {
-      document.getElementById("conciertos").innerHTML += txt;
-      cerrarForm = true;
-      return cerrarForm;
-    }
-  }
 }
 
 // TODO:Cerrar formulario
 function closeForm() { // Es para que se cierre automáticamente al añadir un concierto, no es lo mismo que cerrable()
   if (cerrarForm == true) {
-    document.getElementById("newConcierto").style.display = "none";
+    cerrable();
   }
 }
 
-document.getElementById("closeForm").addEventListener("click", function () {
-  cerrable();
-});
-
 function cerrable() { // Es para que se pueda cerrar directamente, se haya añadido un concierto antes o no
   document.getElementById("newConcierto").style.display = "none";
+  document.getElementById("editConcierto").style.display = "none";
 }
 
-// TODO:Busqueda Formulario 
-// Cuando pulsamos el boton de Grupos o estilos salta el formulario
-function mostrarFormulario() {
-  document.getElementById("formularioBusqueda").style.display = block;
-  document.getElementById("secciones").style.display = block;
-}
-
-function filtraConciertos() {
+/* function filtraConciertos() {
   let filtrado = parseInt(prompt(
     `Hemos hecho estos filtros: 
     1. Los conciertos que se celebran en Madrid
@@ -233,13 +142,40 @@ function filtraConciertos() {
       alert("Has elegido una opción no valida, no ocurrirá nada");
   }
 
+} */
+
+function eliminarEvent(evento) {
+  fetch(`http://localhost:3000/conciertos/${evento}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.status == "200") {
+        document.getElementById("fetchresult").innerHTML = `Concierto ${evento} eliminado correctamente`;
+        imprimirConcierto();
+      } else
+        throw new Error(response.status)
+      response.json()
+    })
 }
 
-// TODO: Eliminar Eventos.DONE
-// Funcion para eliminar Eventos
-function eliminarEvent(evento) {
-  Concert.conciertos.splice(evento, 1);
-  imprimirConcierto(Concert.conciertos);
+function editEvent(evento) {
+  fetch(`http://localhost:3000/conciertos/${evento}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        div: '<div class="concert">',
+        link: '<a href="https://www.the-scorpions.com/">',
+        foto: '<img class="imgEvent" src="images/concierto1.PNG" alt="No se pudo mostrar">',
+        titulo: document.getElementById("tituloo").value,
+        grupo: document.getElementById("grupoo").value,
+        fecha: document.getElementById("fechaa").value,
+        lugar: document.getElementById("lugarr").value,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(imprimirConcierto())
+    .then((document.getElementById("fetchresult").innerHTML = `El concierto ${evento} ha sido editado correctamente. Si no se te muestran los cambios aún, refresca la página.`))
 }
 
 /* Es el botón de go back to top, que saldrá en el momento
@@ -268,14 +204,80 @@ function backToTop() {
 
 // TODO:Formulario Busqueda
 // Cuando pulsamos el boton de Grupos o estilos salta el formulario
-function mostrarFormulario() {
-  var formulario = document.getElementById("formularioBusqueda");
-  formulario.style.display = block;
-  var evento = document.getElementById("secciones");
-  evento.style.display = block;
-}
+
 
 function menuNavRespons() {
   let burger = document.getElementById("hamburger");
   burger.classList.toggle("menuon");
 }
+
+/* ======== ESQUEMA DE FETCH ======== */
+
+/*     var myAPIurl =[]
+    //URL de la Api de Concerts 
+    myAPIurl.push('  http://localhost:3000/concerts')
+    //URL de la APi de Events
+     myAPIurl.push(' http://localhost:3000/events')
+    
+     //COger los conciertos o los eventos
+     const cas = 0
+
+     fetch(myAPIurl[cas])
+     .then(function (response) {
+       console.log('Response.status =', response.status)
+       console.log('Response.type =', response.type)
+       console.log('Response.ok =', response.ok)
+       //return response.text()
+       return response.json()
+       //return response.blob()
+     })
+
+     .then(function (data) {
+       console.log('Les dades retornades:', data)
+     })
+
+     .then(response => response.blob())
+
+     .then(response => response.json())
+
+     .catch(function (error) {
+       console.error('Error en el fetch: ', error.message)
+     }) */
+
+
+// Fetch to GET one concert
+/* fetch('http://localhost:3000/conciertos/1')
+  .then(response => response.json())
+  .then(json => console.log(json)) */
+
+//Fetch to PUT a concert
+/* fetch('http://localhost:3000/conciertos/1', {
+    method: 'PUT',
+    body: JSON.stringify({
+      titulo: 'Concierto',
+      grupo: 'grupo',
+      fecha: 'yyyy-mm-dd',
+      lugar: 'lugar'
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  .then(response => response.json())
+  .then(json => console.log(json)) */
+
+//Fetch to PATCH a concert
+/* fetch('http://localhost:3000/conciertos/1', {
+    method: 'PATCH',
+    body: JSON.stringify({
+      titulo: 'Concierto',
+      grupo: 'grupo',
+      fecha: 'yyyy-mm-dd',
+      lugar: 'lugar'
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  .then(response => response.json())
+  .then(json => console.log(json)) */
