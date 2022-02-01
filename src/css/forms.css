@@ -111,6 +111,11 @@ header a img {
   margin-top: 20vh;
 }
 
+#fetchregisterok {
+  color: green;
+  font-size: 2vw;
+}
+
 /* Formulario */
 
 @media screen and (max-width: 850px) {
