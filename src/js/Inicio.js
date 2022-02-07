@@ -1,8 +1,8 @@
 /**
- * @author: Jeroni Mateo Curieses, Daniel Maestre Hermoso
- * Fecha inicio: 3/11/2021
- * Fecha fin: 28/11/2021
- * Asignatura: Entorno Cliente y Diseño de Interfaces
+ * @author: Daniel Maestre Hermoso
+ * Fecha inicio: 24/01/2022
+ * Fecha fin: 07/02/2022
+ * Asignatura: Entorno Cliente
  * @version: 1.0
  */
 
@@ -10,22 +10,6 @@
 let apiNews = 'http://localhost:3000/noticias';
 let apiEvents = 'http://localhost:3000/eventos';
 
-
-
-// Ordena las noticias según su fecha de publicación
-/* function compare(a, b) {
-  if (a.fecha < b.fecha) {
-    return 1;
-  }
-  if (a.fecha > b.fecha) {
-    return -1;
-  }
-  return 0;
-}
-
-News.noticias.sort(compare); */
-
-// TODO:Imprimir Noticias. DONE
 // Se recorre la estructura de datos para imprimir las noticias en la página de inicio
 
 function imprimirNews() {
@@ -58,28 +42,6 @@ function imprimirNews() {
 
 // Ejecutamos la función para que salte directamente
 imprimirNews();
-
-
-/* function compareEvents(a, b) {
-  if (a.fechaI < b.fechaI) {
-    return -1;
-  }
-  if (a.fechaI > b.fechaI) {
-    return 1;
-  }
-  return 0;
-}
-
-Events.eventos.sort(compareEvents); */
-
-/* function compareEventsPatroc(a, b) {
-  if (a.patronicio !== "" && b.patronicio === "") {
-    return -1;
-  }
-  return 0;
-} */
-
-// Events.eventos.sort(compareEventsPatroc);
 
 // TODO:Imprimir Eventos. DONE
 // Funciona de manera similar a imprimirNews
@@ -117,38 +79,6 @@ function imprimirEventos() {
 
 // Se imprimen automaticamente los eventos
 imprimirEventos();
-
-// TODO: Festival Destacado
-// Tenemos un Festival destacado apartado de otros eventos
-/* const festivalDest = [{
-  foto: '<img class="imgEvent"  src="images/event1.PNG" alt="No se pudo mostrar">',
-  nombre: "Mallorca Live Festival",
-  descripcion: "Venid al gran festival de la musica en Mallorca",
-  fechaI: "22/06/2022",
-  fechaF: "26/06/2022",
-  patronicio: '<img class="patrocinio" src="images/patrocinioEvent1.PNG" alt="No se pudo mostrar">',
-  info: '<a href="https://mallorcalivemusic.com/festival/tickets/?utm_source=Search&utm_medium=paid&utm_content=keywords&utm_campaign=MuseMLF22&gclid=EAIaIQobChMI9dCovays9AIVWJ3VCh0MzgcrEAAYASAAEgI6D_D_BwE" id="ir">Quiero ir</a>',
-}]; */
-
-
-
-// TODO: Imprimir Festival destacado
-/* function festivalDestacado() {
-  let txt = "";
-  txt += '<div class="degradadoizq"></div>';
-  for (let i in festivalDest) {
-    txt += '<div class="festivalDes">';
-    txt += festivalDest[i].foto;
-    txt += "<p><span>" + Events.eventos[i].nombre + "</span></p>";
-    txt += "Fecha de celebración: <br>";
-    txt += festivalDest[i].fechaI + "<br>";
-    txt += festivalDest[i].fechaF + "<br>";
-  }
-  txt += '<div class="degradadoder"></div>';
-  document.getElementById("festivalDestacado").innerHTML = txt;
-}
-
-festivalDestacado() */
 
 /* Es el botón de go back to top, que saldrá en el momento
 que el usuario hace scroll 100px hacia abajo desde el tope de la página */
