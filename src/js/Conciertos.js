@@ -1,12 +1,17 @@
 /**
  * @author: Daniel Maestre Hermoso
  * Fecha inicio: 24/01/2022
- * Fecha fin: 
+ * Fecha fin: 07/02/2022
  * Asignatura: Entorno Cliente
  * @version: 1.0
  */
 
 let apiConcert = 'http://localhost:3000/conciertos';
+
+/**
+ * imprimirConcierto() es para consultar el listado completo de los conciertos, así que por defecto hace el GET
+ * y recupera los conciertos registrados en la fake-api. Luego los imprime como tarjetas en la página de eventos.
+ */
 
 function imprimirConcierto() {
 
@@ -37,11 +42,42 @@ function imprimirConcierto() {
     })
 }
 
-// Se imprime directamente al cargar la página
+// Se ejecuta directamente al cargar la página
 imprimirConcierto();
 
+/**
+ * Se parece a imprimirConcierto(), pero en este caso se busca imprimir solamente aquel
+ * concierto que indique el usuario.
+ */
 
-//TODO: Saltar Formulario Nuevo Concierto 
+function imprimirEsteConcierto(evento) {
+  fetch(`http://localhost:3000/conciertos/${evento}`)
+  .then(response => response.json())
+  .then((evento) => {
+    let txt = "";
+    txt += "<br>";
+    txt += evento.div;
+    txt += evento.link + evento.foto + "</a>";
+    txt += '<div class="infoConcert">';
+    txt += '<div id="edicion">';
+    txt += `<button id="editConcert" onclick="saltarFormularioEdit(${evento.id})"><i class="fas fa-pencil-alt"></i></button>`;
+    txt += `<button onclick="eliminarEvent(${evento.id})" class="delConcert"><i class="fas fa-trash-alt"></i></button>`;
+    txt += '</div>';
+    txt += "<h2>" + evento.titulo + "</h2>";
+    txt += "<h3>" + evento.grupo + "</h3>";
+    txt += "<h3>" + evento.fecha + "</h3>";
+    txt += "<h3>" + evento.lugar + "</h3>";
+    txt += '</div>';
+    txt += '</div>';
+    document.getElementById("conciertos").innerHTML = txt;
+  })
+  .catch(function (error) {
+    document.getElementById("fetcherror").innerHTML = "Ha habido algún problema para mostrar los conciertos";
+  })
+}
+
+
+// Se encarga de mostrar el formualario para crear conciertos
 function saltarFormulario() {
   document.getElementById("newConcierto").style.display = "block";
   document.getElementById("add").addEventListener("click", function () {
@@ -50,6 +86,7 @@ function saltarFormulario() {
   });
 }
 
+// Se encarga de mostrar el formualario para editar conciertos
 function saltarFormularioEdit(evento) {
   document.getElementById("editConcierto").style.display = "block";
   document.getElementById("edit").addEventListener("click", function () {
@@ -59,6 +96,7 @@ function saltarFormularioEdit(evento) {
   return evento;
 }
 
+// Es una validación mínima que trata de evitar que los campos estén vacíos
 function confirmaAdd() {
   if (document.getElementById("link").value === "" ||
     document.getElementById("titulo").value === "" || document.getElementById("grupo").value === "" ||
@@ -85,6 +123,12 @@ function confirmaEdit(evento) {
 
 let cerrarForm = false;
 
+/**
+ * añadirConcierto() es un fetch que utiliza POST con tal de guardar un nuevo concierto en la fake-api.
+ * No está programado para aceptar imágenes, así que introduce una por defecto, el resto de campos sí que
+ * los recoge a partir de los input del formulario
+ */
+
 function añadirConcierto() {
   fetch('http://localhost:3000/conciertos', {
       method: 'POST',
@@ -106,7 +150,6 @@ function añadirConcierto() {
 
 }
 
-// TODO:Cerrar formulario
 function closeForm() { // Es para que se cierre automáticamente al añadir un concierto, no es lo mismo que cerrable()
   if (cerrarForm == true) {
     cerrable();
@@ -118,31 +161,18 @@ function cerrable() { // Es para que se pueda cerrar directamente, se haya añad
   document.getElementById("editConcierto").style.display = "none";
 }
 
-/* function filtraConciertos() {
+// Recoge el input del usuario para determinar qué concierto está buscando
+function filtraConciertos() {
   let filtrado = parseInt(prompt(
-    `Hemos hecho estos filtros: 
-    1. Los conciertos que se celebran en Madrid
-    2. Los conciertos posteriores al 1 de julio de 2022
-    3. Busca un cantante en concreto`));
-  switch (filtrado) {
-    case 1:
-      let concierto = Concert.conciertos.filter(concierto => concierto.lugar === "Madrid");
-      imprimirConcierto(concierto);
-      break;
-    case 2:
-      let concierto2 = Concert.conciertos.filter(concierto => concierto.fecha > "2022-07-01");
-      imprimirConcierto(concierto2);
-      break;
-    case 3:
-      let cantante = prompt("Escribe el nombre del grupo o cantante")
-      let concierto3 = Concert.conciertos.filter(concierto => concierto.grupo === cantante);
-      imprimirConcierto(concierto3);
-      break;
-    default:
-      alert("Has elegido una opción no valida, no ocurrirá nada");
-  }
+    "¿Qué número de concierto quieres consultar?"));
+    imprimirEsteConcierto(filtrado);
+}
 
-} */
+/**
+ * Este fetch usa el método DELETE para eliminar un concierto de la fake-api. El parámetro evento
+ * está determinado por el bóton de papelera que se imprime al lado de cada concierto, el cual recoge
+ * la id de cada concierto.
+ */
 
 function eliminarEvent(evento) {
   fetch(`http://localhost:3000/conciertos/${evento}`, {
@@ -157,6 +187,13 @@ function eliminarEvent(evento) {
       response.json()
     })
 }
+
+/**
+ * Es muy similar a eliminarEvent. Este fetch usa el método PUT para modificar un concierto de la fake-api.
+ * El parámetro evento está determinado por el bóton de editar que se imprime al lado de cada concierto,
+ * el cual recoge la id de cada concierto. Se diferencia de eliminar en que en este caso sí que recoge valores
+ * del formulario para gestionar los datos
+ */
 
 function editEvent(evento) {
   fetch(`http://localhost:3000/conciertos/${evento}`, {
@@ -195,89 +232,13 @@ function scrollFunction() {
   }
 }
 
-// TODO:Go to TOP
 // Vuelve arriba al ser clicado
 function backToTop() {
   document.body.scrollTop = 0; // Safari
   document.documentElement.scrollTop = 0; // Chrome, Firefox, IE y Opera
 }
 
-// TODO:Formulario Busqueda
-// Cuando pulsamos el boton de Grupos o estilos salta el formulario
-
-
 function menuNavRespons() {
   let burger = document.getElementById("hamburger");
   burger.classList.toggle("menuon");
 }
-
-/* ======== ESQUEMA DE FETCH ======== */
-
-/*     var myAPIurl =[]
-    //URL de la Api de Concerts 
-    myAPIurl.push('  http://localhost:3000/concerts')
-    //URL de la APi de Events
-     myAPIurl.push(' http://localhost:3000/events')
-    
-     //COger los conciertos o los eventos
-     const cas = 0
-
-     fetch(myAPIurl[cas])
-     .then(function (response) {
-       console.log('Response.status =', response.status)
-       console.log('Response.type =', response.type)
-       console.log('Response.ok =', response.ok)
-       //return response.text()
-       return response.json()
-       //return response.blob()
-     })
-
-     .then(function (data) {
-       console.log('Les dades retornades:', data)
-     })
-
-     .then(response => response.blob())
-
-     .then(response => response.json())
-
-     .catch(function (error) {
-       console.error('Error en el fetch: ', error.message)
-     }) */
-
-
-// Fetch to GET one concert
-/* fetch('http://localhost:3000/conciertos/1')
-  .then(response => response.json())
-  .then(json => console.log(json)) */
-
-//Fetch to PUT a concert
-/* fetch('http://localhost:3000/conciertos/1', {
-    method: 'PUT',
-    body: JSON.stringify({
-      titulo: 'Concierto',
-      grupo: 'grupo',
-      fecha: 'yyyy-mm-dd',
-      lugar: 'lugar'
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .then(response => response.json())
-  .then(json => console.log(json)) */
-
-//Fetch to PATCH a concert
-/* fetch('http://localhost:3000/conciertos/1', {
-    method: 'PATCH',
-    body: JSON.stringify({
-      titulo: 'Concierto',
-      grupo: 'grupo',
-      fecha: 'yyyy-mm-dd',
-      lugar: 'lugar'
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .then(response => response.json())
-  .then(json => console.log(json)) */
