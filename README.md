@@ -4,7 +4,7 @@ Se trata de una práctica para la asignatura de DWEC en la cual reutilizamos la 
 
 ## Cómo utilizarlo
 
-Hay que ejecutar los comandos para abrir dos servidores de fake-api. Uno es para el CRUD de los conciertos y el otro para el apartado de autenticación. En mi caso, guardo todos los datos en carpetas apartadas que se llaman api y api-auth. Ejecuto el primer servidor con el comando ```npm run api-crud```, y el segundo con ```npm run dev```. Hay que asegurarse de ejecutar estos comandos en la carpeta correcta, ya que se comprueban los script de los package.json de cada carpeta. El localhost para ver la página en sí se puede abrir con una extensión como Live Server.
+Hay que ejecutar los comandos para abrir dos servidores de fake-api: [este](https://github.com/typicode/json-server) y [este](https://github.com/classicoman2/fake-api-jwt-json-server). Uno es para el CRUD de los conciertos y el otro para el apartado de autenticación. En mi caso, guardo todos los datos en carpetas apartadas que se llaman api y api-auth. Ejecuto el primer servidor con el comando ```npm run api-crud```, y el segundo con ```npm run dev```. Hay que asegurarse de ejecutar estos comandos en la carpeta correcta, ya que se comprueban los script de los package.json de cada carpeta. El localhost para ver la página en sí se puede abrir con una extensión como Live Server.
 
 ## Funcionalidades
 
