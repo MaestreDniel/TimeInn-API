@@ -1,12 +1,11 @@
 // El fichero sería como un main.js, aquí importa los datos necesarios
 
-
 import {
-  loginValido, mostrarPassword, paginaSignUp, validarPassword, ocultarPasswordLogin , SignUpValido
+  mostrarPassword, paginaSignUp, ocultarPasswordLogin, loginApi
 } from "./validaciones.mjs";
 
 document.getElementById("password").addEventListener("blur", function () {
-  validarPassword();
+  // validarPassword();
 })
 
 document.getElementById("verPassword").addEventListener("mousedown", function () {
@@ -19,7 +18,7 @@ document.getElementById("verPassword").addEventListener("mouseup", function () {
 
 document.getElementById("loginButton").addEventListener("click", function () {
   checkCookie();
-  loginValido();
+  loginApi();
 })
 
 document.getElementById("signUpButton").addEventListener("click", function () {

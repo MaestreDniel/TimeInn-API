@@ -1,68 +1,3 @@
-// Fichero de módulos: "1. Els fitxers de mòduls haurien de tenir l'extensió .mjs"
-
-
-//TODO:Input validacion
-//Campo invalido false
-function toggleInputFalse(myinput) {
-  let input = document.getElementById(myinput);
-  input.classList.toggle("novalido", true);
-  input.classList.toggle("valido", false);
-}
-//Campo valido true
-function toggleInputTrue(myinput) {
-  let input = document.getElementById(myinput);
-  input.classList.toggle("valido", true);
-  input.classList.toggle("novalido", false);
-}
-
-
-//TODO: Validar Nombre Login
-export function validarNameLogin() {
-
-
-  //Si el nombre del usuario no existe salta el error y retorna falso
-  /* if (existeUser()) {
-    document.getElementById("errorName").innerHTML =
-      "Este nombre de usuario no está registrado";
-    toggleInputFalse("user");
-    return false;
-  }
-  //En caso contrario retorna true  
-  else {
-    document.getElementById("errorName").innerHTML = "";
-    toggleInputTrue("user");
-    return true;
-  } */
-}
-
-//TODO: Login Validado Correctamente
-export function loginValido() {
-  //Si el nombre y la contraseña del login se han validado el usuario se puede loguear
-  if (validarNameLogin() && validarPassword()) {
-    //Se loguea y nos llevara a la pagina de inicio de la web
-
-    window.location.href = "./";
-  } else {
-    document.getElementById("errorLogin").innerHTML =
-      "Credenciales incorrectas";
-    //Si no se valida correctamente el user Login se marca en rojo
-    if (!validarNameLogin()) {
-      document.getElementById("user").focus();
-
-    }
-    //Si no se valida correctamente la contraseña Login se marca en rojo
-    else if (!validarPassword()) {
-      document.getElementById("password").focus();
-    }
-  }
-}
-
-//TODO: Validacion SignUP
-export function SignUpValido() {
-  
-}
-
-
 export function paginaSignUp() {
   window.location.href = "./SignUp.html";
 }
@@ -110,17 +45,30 @@ export function signUpApi() {
       }
     })
     .then((document.getElementById("fetchregisterok").innerHTML = "Te has registrado correctamente."))
-    //.then(SignUpValido());
 }
 
-export function loginApi() { // Mirarlo
-  fetch('http://localhost:3001/auth/login')
-    .then((response) => response.json())
-    .then((conciertos) => {
-      
-      //document.getElementById("conciertos").innerHTML = txt;
+export function loginApi() {
+  let url = 'http://localhost:3001/auth/login';
+  let headers = new Headers();
+  let email = document.getElementById("user").value;
+  let password = document.getElementById("password").value;
+
+  headers.set('Authorization', 'Basic ' + btoa(email + ":" + password))
+
+  fetch(url, {
+      method: 'GET',
+      headers: headers,
+    })
+    .then(function (response) {
+      console.log('Response.status =', response.status)
+      if (response.status == 200) {
+        window.location.href = "./"
+      } else {
+        document.getElementById("errorLogin").innerHTML = "Estas credenciales son incorrectas";
+      }
+      return response.json()
     })
     .catch(function (error) {
-      console.log(error);
+      console.error('Error en el fetch: ', error.message)
     })
 }

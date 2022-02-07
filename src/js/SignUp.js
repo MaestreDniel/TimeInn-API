@@ -22,7 +22,6 @@ document.getElementById("loginButton").addEventListener("click", function () {
 })
 
 document.getElementById("signUpButton").addEventListener("click", function () {
-  //SignUpValido();
   signUpApi();
 })
 
